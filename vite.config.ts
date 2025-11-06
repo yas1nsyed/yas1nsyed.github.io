@@ -5,7 +5,7 @@ import { componentTagger } from "lovable-tagger";
 
 // https://vitejs.dev/config/
 export default defineConfig(({ mode }) => ({
-  base: "/yas1nsyed.github.io/", // 👈 Add this line
+  base: "/", // CRITICAL: This fixes the blank page issue
   server: {
     host: "::",
     port: 8080,
