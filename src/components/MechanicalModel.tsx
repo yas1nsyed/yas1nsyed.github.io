@@ -148,14 +148,14 @@ const MechanicalModel = () => {
   return (
     <div className="w-full h-[500px] bg-background/50 rounded-xl overflow-hidden border border-primary/20">
       <Canvas shadows>
-        <PerspectiveCamera makeDefault position={[250, 250, 250]} />
+        <PerspectiveCamera makeDefault position={[5, 3, 5]} />
         <OrbitControls 
           enableZoom={true}
           enablePan={true}
-          minDistance={50}
-          maxDistance={600}
+          minDistance={3}
+          maxDistance={15}
           autoRotate
-          autoRotateSpeed={0.8}
+          autoRotateSpeed={0.5}
         />
         
         {/* Lighting */}
@@ -175,10 +175,10 @@ const MechanicalModel = () => {
         <Flange position={[0, 0, 0]} rotationSpeed={0.005} />
         
         {/* Grid helper for CAD feel */}
-        <gridHelper args={[500, 50, '#00d9ff', '#334155']} position={[0, -50, 0]} />
+        <gridHelper args={[10, 10, '#00d9ff', '#334155']} position={[0, -2, 0]} />
         
         {/* Axis helper */}
-        <axesHelper args={[100]} />
+        <axesHelper args={[3]} />
       </Canvas>
     </div>
   );
