@@ -103,6 +103,7 @@ const Flange = ({ position = [0, 0, 0], rotationSpeed = 0.005 }: FlangeProps) =>
 
     finalFlange.updateMatrix();
     finalFlange.geometry.computeVertexNormals();
+    finalFlange.geometry.scale(0.01, 0.01, 0.01);
 
     return finalFlange;
   }, []);
@@ -172,7 +173,8 @@ const MechanicalModel = () => {
         />
         
         {/* 3D Models */}
-        <Flange position={[0, 0, 0]} rotationSpeed={0.005} />
+        <Flange position={[0,0,0]} rotationSpeed={0.005} />
+
         
         {/* Grid helper for CAD feel */}
         <gridHelper args={[500, 50, '#00d9ff', '#334155']} position={[0, -50, 0]} />
