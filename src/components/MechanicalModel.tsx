@@ -2,7 +2,6 @@ import { useRef, useMemo } from 'react';
 import { Canvas, useFrame } from '@react-three/fiber';
 import { OrbitControls, PerspectiveCamera } from '@react-three/drei';
 import * as THREE from 'three';
-import { CSG } from 'three-csg-ts';
 
 interface FlangeProps {
   position?: [number, number, number];
