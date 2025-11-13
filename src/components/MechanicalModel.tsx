@@ -148,7 +148,7 @@ const MechanicalModel = () => {
   return (
     <div className="w-full h-[500px] bg-background/50 rounded-xl overflow-hidden border border-primary/20">
       <Canvas shadows>
-        <PerspectiveCamera makeDefault position={[250, 200, 250]} />
+        <PerspectiveCamera makeDefault position={[2500, 2000, 2500]} />
         <OrbitControls 
           enableZoom={true}
           enablePan={true}
