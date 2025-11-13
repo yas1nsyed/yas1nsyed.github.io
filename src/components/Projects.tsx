@@ -23,16 +23,9 @@ const projects = [
     featured: true
   },
   {
-    title: "Passive Cooling CFD Analysis",
-    description: "Full-scale CAD modeling and CFD simulation for electric vehicle passive air-cooling system. Eliminated need for active cooling through iterative design optimization.",
-    tech: ["CFD", "CAD", "Thermal Analysis", "Battery Systems"],
-    date: "Jul-Nov 2022",
-    category: "CAE/Simulation"
-  },
-  {
     title: "Mülltrenner9000",
     description: "AI-powered waste segregation system using Detectron2 for German Mülltrennung. Outputs masked images of trash classified by recycling bin type.",
-    tech: ["PyTorch", "Detectron2", "OpenCV", "Instance Segmentation"],
+    tech: ["PyTorch", "YOLOv11", "OpenCV", "Instance Segmentation"],
     github: "https://github.com/yas1nsyed/mulltrenner9000",
     date: "Jun 2025",
     category: "Computer Vision"
@@ -45,11 +38,11 @@ const projects = [
     category: "Autonomous Driving"
   },
   {
-    title: "Wall-Climbing Robot",
-    description: "Designed robot using reverse thrust for wall adhesion with wheel-driven locomotion. Performed complete CFD simulation for fan design and structural validation.",
-    tech: ["CFD", "Robotics", "CAD", "Simulation"],
-    date: "2022",
-    category: "Robotics/CAE"
+    title: "Car Semantic Segmentation",
+    description: "Built a U-Net-based semantic segmentation model using the Cityscapes dataset to segment urban scene elements. Implemented custom data loading and training in TensorFlow/Keras.",
+    tech: ["Computer Vision", "Segmentation", "OpenCV", "TensorFlow"],
+    date: "May 2025",
+    category: "Autonomous Driving"
   }
 ];
 
@@ -58,9 +51,9 @@ const Projects = () => {
     <section id="projects" className="py-24 px-4">
       <div className="container mx-auto max-w-6xl">
         <div className="text-center mb-16 space-y-4">
-          <h2 className="text-4xl md:text-5xl font-bold">Featured Projects</h2>
+          <h2 className="text-4xl md:text-5xl font-bold">My Projects</h2>
           <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
-            Innovative solutions at the intersection of AI, mechanical engineering, and CAD
+            AI-Driven CAD Automation | Engineering Intelligent and Sustainable Mobility Systems
           </p>
         </div>
 

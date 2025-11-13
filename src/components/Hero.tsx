@@ -29,17 +29,16 @@ const Hero = () => {
           <div className="space-y-4 animate-fade-in">
             <div className="inline-flex items-center gap-3 text-primary mb-2 px-4 py-2 bg-primary/10 rounded-full border border-primary/30">
               <Cpu className="w-4 h-4" />
-              <span className="text-sm font-medium">CAD/CAE Engineer • AI Specialist</span>
+              <span className="text-sm font-medium">Artificial Intellegence • Mechanical Engineering </span>
             </div>
             <h1 className="text-5xl md:text-7xl font-bold tracking-tight bg-gradient-to-r from-primary via-accent to-primary bg-clip-text text-transparent">
               Yasin Syed Mohammed
             </h1>
             <p className="text-xl md:text-2xl text-foreground max-w-2xl mx-auto font-semibold">
-              Mechanical Engineering × Artificial Intelligence
+              Innovating at the intersection of AI and Mechanical Engineering
             </p>
             <p className="text-lg text-muted-foreground max-w-3xl mx-auto leading-relaxed">
-              Automating CAD workflows with AI | Building intelligent design systems | 
-              Specializing in electromobility, autonomous systems, and sustainable manufacturing
+              M.Sc. Student in Electromobility at FAU | Majoring in AI & Autonomous Driving and Sustainable Production
             </p>
             <div className="flex items-center gap-2 justify-center text-sm text-muted-foreground">
               <MapPin className="w-4 h-4 text-primary" />
@@ -74,6 +73,17 @@ const Hero = () => {
             >
               <Github className="w-6 h-6" />
             </a>
+
+            <a 
+              href="https://huggingface.co/Yas1n" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              className="text-muted-foreground hover:text-primary transition-colors flex items-center justify-center text-xl"
+              title="Hugging Face"
+            >
+              🤗
+            </a>
+
             <a 
               href="mailto:yasin.m.syed@fau.de"
               className="text-muted-foreground hover:text-primary transition-colors"
@@ -81,6 +91,7 @@ const Hero = () => {
               <Mail className="w-6 h-6" />
             </a>
           </div>
+
         </div>
       </div>
 

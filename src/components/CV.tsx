@@ -13,8 +13,7 @@ const CV = () => {
       grade: "1.7",
       highlights: [
         "Majors: AI and Autonomous Driving, Sustainable Production",
-        "Computer-Aided Product Design Methods, Machine Learning, Perception in Robotics",
-        "Data Science, Algorithms, Introduction to Deep Learning"
+        "Skills: AI/ML, Computer Vision, CAD"
       ]
     },
     {
@@ -24,8 +23,7 @@ const CV = () => {
       period: "Aug 2019 – May 2023",
       grade: "1.81",
       highlights: [
-        "Programming for Problem Solving, Automation in Manufacturing",
-        "CAD/CAM, Robotics"
+        "Skills: CAD/CAM/CAE, Mechanics"
       ]
     }
   ];
@@ -37,19 +35,18 @@ const CV = () => {
       location: "Remote",
       period: "Jul 2024 - Sep 2024",
       highlights: [
-        "Designed product range and 3D-printed models using CATIA",
+        "Designed the product range using CATIA and made model prototypes",
         "Developed injection molds for material efficiency and cost-effectiveness"
       ]
     },
     {
-      role: "Graduate Engineering Trainee",
+      role: "Senior Engineer (Mechanical)",
       company: "Larsen & Toubro Ltd.",
       location: "Prayagraj, India",
       period: "July 2023 – Aug 2024",
       highlights: [
-        "R&D, Machinery and QA/QC departments exposure",
-        "FEA simulation and assembly of Precast concrete structures",
-        "Monitored machinery health for OHSR structural design"
+        "R&D, Machinery and QA/QC departments rotations",
+        "FEA simulation for assembly of Precast concrete structures"
       ]
     },
     {
@@ -77,7 +74,7 @@ const CV = () => {
 
   const skills = {
     "Programming": ["Python", "C", "MATLAB"],
-    "AI/ML": ["PyTorch", "TensorFlow", "Keras", "ScikitLearn", "OpenCV", "Computer Vision"],
+    "AI/ML/CV": ["PyTorch", "TensorFlow", "Keras", "ScikitLearn", "OpenCV", "Computer Vision"],
     "CAD/CAE": ["CATIA V5", "SolidWorks", "SiemensNX", "Creo", "Ansys", "Altair HyperWorks CFD", "FreeCAD"],
     "Tools": ["Git", "CI/CD", "NumPy"]
   };
@@ -86,14 +83,17 @@ const CV = () => {
     {
       title: "Design and Analysis of Wall-Climbing Robot",
       description: "Designed wall-climbing robot using reverse thrust and wheel-driven locomotion. Performed CFD simulation.",
-      doi: "10.2991/978-94-6463-252-1_108"
+      doi: "10.2991/978-94-6463-252-1_108",
+      link: "https://www.atlantis-press.com/proceedings/icete-23/125994123"
     },
     {
       title: "Investigation of Tuned Mass-Damper System on Vehicle Vibrations",
       description: "Developed TMD system for vehicle suspension. Used MATLAB for optimization.",
-      doi: "10.2991/978-94-6463-252-1_105"
+      doi: "10.2991/978-94-6463-252-1_105",
+      link: "https://www.atlantis-press.com/proceedings/icete-23/125994101"
     }
   ];
+
 
   return (
     <section id="cv" className="py-24 px-4 bg-secondary/20">
