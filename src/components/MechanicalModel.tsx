@@ -122,14 +122,3 @@ export const Flange = ({ position = [0, 0, 0], rotationSpeed = 0.005 }: FlangePr
     </mesh>
   );
 };
-
-const MechanicalModel = () => {
-  return (
-    <>
-      <Flange position={[0, 0, 0]} rotationSpeed={0.01} />
-      {/* Other components can be added here */}
-    </>
-  );
-};
-
-export default MechanicalModel;
