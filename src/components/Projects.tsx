@@ -1,7 +1,14 @@
+import { useState } from 'react';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { ExternalLink, Github } from "lucide-react";
+import { ExternalLink, Github, ChevronDown } from "lucide-react";
+import { 
+  Collapsible,
+  CollapsibleContent,
+  CollapsibleTrigger,
+} from './ui/collapsible';
+import { GLTFViewer } from './GLTFViewer';
 
 const projects = [
   {
@@ -47,6 +54,16 @@ const projects = [
 ];
 
 const Projects = () => {
+  const [cadomaticOpen, setCadomaticOpen] = useState(false);
+
+  const cadomaticModels = [
+    { name: 'Flange', url: '/assets/Flange.gltf' },
+    { name: 'Bearing', url: '/assets/Bearing.gltf' },
+    { name: 'Teapot', url: '/assets/Teapot.gltf' },
+    { name: 'Herringbone', url: '/assets/HerringboneGear.gltf' },    
+    // Add your GLTF files here
+  ];
+
   return (
     <section id="projects" className="py-24 px-4">
       <div className="container mx-auto max-w-6xl">
@@ -114,6 +131,43 @@ const Projects = () => {
             </Card>
           ))}
         </div>
+
+        {/* CADomatic Project - GLTF Models */}
+        <div className="space-y-4 mb-8">
+          <div className="bg-card border border-primary/20 rounded-lg p-6">
+            <h3 className="text-2xl font-semibold mb-2">CADomatic</h3>
+            <p className="text-muted-foreground mb-4">
+              AI-powered CAD workflow automation and intelligent design systems
+            </p>
+
+            <Collapsible open={cadomaticOpen} onOpenChange={setCadomaticOpen}>
+              <CollapsibleTrigger asChild>
+                <Button 
+                  variant="outline" 
+                  className="gap-2 border-primary/50 hover:border-primary"
+                >
+                  Show More Models
+                  <ChevronDown 
+                    className={`w-4 h-4 transition-transform ${
+                      cadomaticOpen ? 'rotate-180' : ''
+                    }`}
+                  />
+                </Button>
+              </CollapsibleTrigger>
+              
+              <CollapsibleContent className="mt-6 space-y-6">
+                {cadomaticModels.map((model, index) => (
+                  <div key={index} className="space-y-2">
+                    <h4 className="font-semibold text-sm">{model.name}</h4>
+                    <GLTFViewer modelUrl={model.url} />
+                  </div>
+                ))}
+              </CollapsibleContent>
+            </Collapsible>
+          </div>
+        </div>
+
+        {/* Other projects... */}
       </div>
     </section>
   );
