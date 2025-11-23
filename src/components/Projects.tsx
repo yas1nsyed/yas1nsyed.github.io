@@ -2,13 +2,8 @@ import { useState } from 'react';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { ExternalLink, Github, ChevronDown } from "lucide-react";
-import { 
-  Collapsible,
-  CollapsibleContent,
-  CollapsibleTrigger,
-} from './ui/collapsible';
-import { GLTFViewer } from './GLTFViewer';
+import { ExternalLink, Github } from "lucide-react";
+import { GLTFViewer } from './GLTFViewer'; // Your 3D viewer component
 
 const projects = [
   {
@@ -53,16 +48,32 @@ const projects = [
   }
 ];
 
+const cadomaticModels = [
+  {
+    name: "FLANGE",
+    url: "/assets/Flange.gltf",
+    prompt: `Make a flange of OD 100mm, bore size 50mm, thickness 7.5mm. 
+             The height of the middle hollow neck must be 15mm. 
+             Make 6 M12 holes at PCD 75mm.`,
+  },
+  {
+    name: "TEAPOT",
+    url: "/assets/Teapot.gltf",
+    prompt: `Make a Utah teapot.`,
+  },
+  {
+    name: "BEARING",
+    url: "/assets/Bearing.gltf",
+    prompt: `Make a ball bearing of OD 32mm following standard convention.`,
+  },
+  {
+    name: "HERRINGBONE GEAR",
+    url: "/assets/HerringboneGear.gltf",
+    prompt: `Make a herringbone gear.`,
+  },
+];
+
 const Projects = () => {
-  const [cadomaticOpen, setCadomaticOpen] = useState(false);
-
-  const cadomaticModels = [
-    { name: 'Flange', url: '/assets/Flange.gltf' },
-    { name: 'Bearing', url: '/assets/Bearing.gltf' },
-    { name: 'Teapot', url: '/assets/Teapot.gltf' },
-    { name: 'Herringbone Gear', url: '/assets/HerringboneGear.gltf' },
-  ];
-
   return (
     <section id="projects" className="py-24 px-4">
       <div className="container mx-auto max-w-6xl">
@@ -75,8 +86,8 @@ const Projects = () => {
 
         <div className="grid md:grid-cols-2 gap-6">
           {projects.map((project, index) => (
-            <Card 
-              key={index} 
+            <Card
+              key={index}
               className={`group hover:shadow-[var(--shadow-card)] transition-all duration-300 border-border/50 hover:border-primary/50 bg-card/50 backdrop-blur-sm ${
                 project.featured ? 'md:col-span-2 border-primary/30' : ''
               }`}
@@ -115,8 +126,8 @@ const Projects = () => {
                   </div>
 
                   {project.github && (
-                    <Button 
-                      variant="ghost" 
+                    <Button
+                      variant="ghost"
                       className="w-full gap-2 hover:bg-primary/10 hover:text-primary"
                       asChild
                     >
@@ -129,82 +140,58 @@ const Projects = () => {
                   )}
                 </div>
 
-                {/* Only for CADomatic */}
+                {/* CADomatic specific: 3D GLTF models */}
                 {project.title === "CADomatic" && (
                   <div className="mt-8 space-y-10">
-
-                    {/* CAD Models */}
-                    <Collapsible open={cadomaticOpen} onOpenChange={setCadomaticOpen}>
-                      <CollapsibleTrigger asChild>
-                        <Button 
-                          variant="outline"
-                          className="gap-2 border-primary/50 hover:border-primary"
-                        >
-                          Show CAD Models
-                          <ChevronDown 
-                            className={`w-4 h-4 transition-transform ${
-                              cadomaticOpen ? 'rotate-180' : ''
-                            }`}
-                          />
-                        </Button>
-                      </CollapsibleTrigger>
-
-                      <CollapsibleContent className="mt-6">
-                        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                          {cadomaticModels.map((model, modelIndex) => (
-                            <div key={modelIndex} className="space-y-2">
-                              <h4 className="font-semibold text-sm">{model.name}</h4>
-                              <GLTFViewer modelUrl={model.url} />
-                            </div>
-                          ))}
+                    <div className="grid md:grid-cols-2 gap-6">
+                      {cadomaticModels.map((model, idx) => (
+                        <div key={idx} className="p-4 bg-secondary/50 rounded-xl space-y-2">
+                          <GLTFViewer modelUrl={model.url} />
+                          <div className="font-bold text-lg">{model.name}</div>
+                          <p className="text-sm text-muted-foreground">{model.prompt}</p>
                         </div>
-                      </CollapsibleContent>
-                    </Collapsible>
-
-                    {/* Supporting Projects */}
-                    <div className="bg-secondary/40 border border-primary/20 p-6 rounded-lg">
-                      <h3 className="text-xl font-semibold mb-3">Supporting Projects</h3>
-                      <p className="text-sm text-muted-foreground mb-4">
-                        Core datasets and tools powering CADomatic’s parametric CAD automation.
-                      </p>
-
-                      <div className="space-y-4">
-
-                        {/* Dataset */}
-                        <a 
-                          href="https://huggingface.co/datasets/Yas1n/FreeCAD_Sketches"
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="block p-4 rounded-lg border border-border/50 hover:border-primary/40 hover:bg-primary/5 transition-colors"
-                        >
-                          <div className="flex justify-between items-start">
-                            <h4 className="font-semibold text-primary">🧩 FreeCAD Sketch Python Dataset</h4>
-                            <ExternalLink className="w-4 h-4 text-muted-foreground" />
-                          </div>
-                          <p className="text-sm mt-1 text-muted-foreground">
-                            Dataset of <strong>3,000 parametric sketch Python files</strong> for training LLMs to generate geometric CAD code.
-                          </p>
-                        </a>
-
-                        {/* Parser Macro */}
-                        <a 
-                          href="https://github.com/yas1nsyed/freecad_sketch_paser"
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="block p-4 rounded-lg border border-border/50 hover:border-primary/40 hover:bg-primary/5 transition-colors"
-                        >
-                          <div className="flex justify-between items-start">
-                            <h4 className="font-semibold text-primary">🔧 FreeCAD Sketch Parser Macro</h4>
-                            <ExternalLink className="w-4 h-4 text-muted-foreground" />
-                          </div>
-                          <p className="text-sm mt-1 text-muted-foreground">
-                            FreeCAD macro that auto-generates Python scripts for every sketch in a model — perfect for dataset creation.
-                          </p>
-                        </a>
-
-                      </div>
+                      ))}
                     </div>
 
+                    {/* Supporting Projects */}
+                    <div className="mt-12 space-y-6">
+                      <h3 className="text-2xl font-bold">Supporting Projects</h3>
+
+                      <a
+                        href="https://huggingface.co/datasets/Yas1n/FreeCAD_Sketches"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="block p-4 rounded-xl bg-secondary/50 hover:bg-secondary transition-colors"
+                      >
+                        <div className="font-semibold text-lg">🧩 FreeCAD Sketch Python Dataset</div>
+                        <p className="text-sm text-muted-foreground">
+                          A dataset of 3,000 Python files representing parametric FreeCAD sketches—ideal for training
+                          LLMs to understand CAD design.
+                        </p>
+                      </a>
+
+                      <a
+                        href="https://github.com/yas1nsyed/freecad_sketch_paser"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="block p-4 rounded-xl bg-secondary/50 hover:bg-secondary transition-colors"
+                      >
+                        <div className="font-semibold text-lg">📐 FreeCAD Sketch Parser Macro</div>
+                        <p className="text-sm text-muted-foreground">
+                          A FreeCAD macro for automatically generating Python code for all sketches in a part.
+                        </p>
+                      </a>
+                    </div>
+
+                    {/* Generate Button */}
+                    <div className="text-center mt-8">
+                      <Button
+                        size="lg"
+                        className="bg-primary hover:bg-primary/90 text-primary-foreground shadow-lg hover:shadow-[var(--shadow-glow)] transition-all"
+                      >
+                        Generate Your Own CAD Model
+                      </Button>
+                    </div>
                   </div>
                 )}
               </CardContent>
