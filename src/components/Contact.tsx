@@ -1,6 +1,7 @@
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
-import { Github, Mail, MapPin, Phone } from "lucide-react";
+import { Github, Mail, MapPin } from "lucide-react";
+import HuggingFaceIcon from "@/components/icons/HuggingFaceIcon";
 
 const Contact = () => {
   return (
@@ -16,6 +17,8 @@ const Contact = () => {
         <Card className="border-border/50 bg-card/50 backdrop-blur-sm">
           <CardContent className="p-8">
             <div className="grid md:grid-cols-2 gap-6">
+
+              {/* Email */}
               <a 
                 href="mailto:yasin.m.syed@fau.de"
                 className="flex items-center gap-4 p-4 rounded-lg bg-secondary/50 hover:bg-secondary transition-colors group"
@@ -29,19 +32,23 @@ const Contact = () => {
                 </div>
               </a>
 
+              {/* HuggingFace */}
               <a 
-                href="tel:+4915222056640"
+                href="https://huggingface.co/Yas1n"
+                target="_blank"
+                rel="noopener noreferrer"
                 className="flex items-center gap-4 p-4 rounded-lg bg-secondary/50 hover:bg-secondary transition-colors group"
               >
                 <div className="p-3 rounded-full bg-primary/10 group-hover:bg-primary/20 transition-colors">
-                  <Phone className="w-6 h-6 text-primary" />
+                  <HuggingFaceIcon className="w-6 h-6 text-primary" />
                 </div>
                 <div>
-                  <div className="font-semibold">Phone</div>
-                  <div className="text-sm text-muted-foreground">+49 15222056640</div>
+                  <div className="font-semibold">HuggingFace</div>
+                  <div className="text-sm text-muted-foreground">huggingface.co/Yas1n</div>
                 </div>
               </a>
 
+              {/* Location */}
               <div className="flex items-center gap-4 p-4 rounded-lg bg-secondary/50">
                 <div className="p-3 rounded-full bg-accent/10">
                   <MapPin className="w-6 h-6 text-accent" />
@@ -52,6 +59,7 @@ const Contact = () => {
                 </div>
               </div>
 
+              {/* GitHub */}
               <a 
                 href="https://github.com/yas1nsyed"
                 target="_blank"

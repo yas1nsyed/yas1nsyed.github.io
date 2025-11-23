@@ -27,13 +27,13 @@ export const GLTFViewer = ({ modelUrl }: { modelUrl: string }) => {
       <Canvas camera={{ position: [2, 1, 5], fov: 50 }}>
         
         {/* Improved Lighting */}
-        <ambientLight intensity={0.8} />
-        <hemisphereLight intensity={0.9} groundColor="#222" />
-        <directionalLight position={[5, 5, 5]} intensity={1.5} />
-        <directionalLight position={[-5, -5, 5]} intensity={0.8} />
+        <ambientLight intensity={10} />
+        <hemisphereLight intensity={10} groundColor="#222" />
+        <directionalLight position={[5, 5, 5]} intensity={2.5} />
+        <directionalLight position={[-5, -5, 5]} intensity={2.5} />
 
         {/* Bigger Model */}
-        <Model url={modelUrl} scale={12.5} />
+        <Model url={modelUrl} scale={18} />
 
         <OrbitControls autoRotate />
       </Canvas>

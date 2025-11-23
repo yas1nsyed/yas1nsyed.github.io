@@ -3,6 +3,7 @@ import { Github, Mail, MapPin, Cpu } from "lucide-react";
 import heroBg from "@/assets/hero-bg.jpg";
 import CADBackground from "./CADBackground";
 import ThreeDName from "./ThreeDName";
+import HuggingFaceIcon from "@/components/icons/HuggingFaceIcon";
 
 const Hero = () => {
   return (
@@ -67,7 +68,9 @@ const Hero = () => {
             </Button>
           </div>
 
+          {/* Social Links */}
           <div className="flex gap-4 justify-center pt-4">
+            {/* GitHub */}
             <a 
               href="https://github.com/yas1nsyed" 
               target="_blank" 
@@ -76,6 +79,18 @@ const Hero = () => {
             >
               <Github className="w-6 h-6" />
             </a>
+
+            {/* HuggingFace */}
+            <a 
+              href="https://huggingface.co/Yas1n"
+              target="_blank" 
+              rel="noopener noreferrer"
+              className="text-muted-foreground hover:text-primary transition-colors"
+            >
+              <HuggingFaceIcon className="w-6 h-6" />
+            </a>
+
+            {/* Email */}
             <a 
               href="mailto:yasin.m.syed@fau.de"
               className="text-muted-foreground hover:text-primary transition-colors"

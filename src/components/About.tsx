@@ -1,7 +1,7 @@
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Bot, Cog, Zap, Leaf } from "lucide-react";
-import MechanicalModel from "./MechanicalModel";
+// import MechanicalModel from "./MechanicalModel";
 
 const About = () => {
   const specializations = [
@@ -34,14 +34,7 @@ const About = () => {
           <h2 className="text-4xl md:text-5xl font-bold">Engineering Meets Intelligence</h2>
           <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
             Bridging traditional mechanical engineering with cutting-edge AI to create intelligent design automation systems
-          </p>
-        </div>
 
-        {/* Interactive 3D Model */}
-        <div className="mb-16">
-          <MechanicalModel />
-          <p className="text-center text-sm text-muted-foreground mt-4">
-            Interactive 3D Model • Click and drag to rotate • Scroll to zoom
           </p>
         </div>
 

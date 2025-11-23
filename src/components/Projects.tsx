@@ -60,8 +60,7 @@ const Projects = () => {
     { name: 'Flange', url: '/assets/Flange.gltf' },
     { name: 'Bearing', url: '/assets/Bearing.gltf' },
     { name: 'Teapot', url: '/assets/Teapot.gltf' },
-    { name: 'Herringbone', url: '/assets/HerringboneGear.gltf' },    
-    // Add your GLTF files here
+    { name: 'Herringbone Gear', url: '/assets/HerringboneGear.gltf' },
   ];
 
   return (
@@ -104,6 +103,7 @@ const Projects = () => {
                   {project.description}
                 </CardDescription>
               </CardHeader>
+
               <CardContent>
                 <div className="space-y-4">
                   <div className="flex flex-wrap gap-2">
@@ -113,6 +113,7 @@ const Projects = () => {
                       </Badge>
                     ))}
                   </div>
+
                   {project.github && (
                     <Button 
                       variant="ghost" 
@@ -127,47 +128,89 @@ const Projects = () => {
                     </Button>
                   )}
                 </div>
+
+                {/* Only for CADomatic */}
+                {project.title === "CADomatic" && (
+                  <div className="mt-8 space-y-10">
+
+                    {/* CAD Models */}
+                    <Collapsible open={cadomaticOpen} onOpenChange={setCadomaticOpen}>
+                      <CollapsibleTrigger asChild>
+                        <Button 
+                          variant="outline"
+                          className="gap-2 border-primary/50 hover:border-primary"
+                        >
+                          Show CAD Models
+                          <ChevronDown 
+                            className={`w-4 h-4 transition-transform ${
+                              cadomaticOpen ? 'rotate-180' : ''
+                            }`}
+                          />
+                        </Button>
+                      </CollapsibleTrigger>
+
+                      <CollapsibleContent className="mt-6">
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                          {cadomaticModels.map((model, modelIndex) => (
+                            <div key={modelIndex} className="space-y-2">
+                              <h4 className="font-semibold text-sm">{model.name}</h4>
+                              <GLTFViewer modelUrl={model.url} />
+                            </div>
+                          ))}
+                        </div>
+                      </CollapsibleContent>
+                    </Collapsible>
+
+                    {/* Supporting Projects */}
+                    <div className="bg-secondary/40 border border-primary/20 p-6 rounded-lg">
+                      <h3 className="text-xl font-semibold mb-3">Supporting Projects</h3>
+                      <p className="text-sm text-muted-foreground mb-4">
+                        Core datasets and tools powering CADomatic’s parametric CAD automation.
+                      </p>
+
+                      <div className="space-y-4">
+
+                        {/* Dataset */}
+                        <a 
+                          href="https://huggingface.co/datasets/Yas1n/FreeCAD_Sketches"
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="block p-4 rounded-lg border border-border/50 hover:border-primary/40 hover:bg-primary/5 transition-colors"
+                        >
+                          <div className="flex justify-between items-start">
+                            <h4 className="font-semibold text-primary">🧩 FreeCAD Sketch Python Dataset</h4>
+                            <ExternalLink className="w-4 h-4 text-muted-foreground" />
+                          </div>
+                          <p className="text-sm mt-1 text-muted-foreground">
+                            Dataset of <strong>3,000 parametric sketch Python files</strong> for training LLMs to generate geometric CAD code.
+                          </p>
+                        </a>
+
+                        {/* Parser Macro */}
+                        <a 
+                          href="https://github.com/yas1nsyed/freecad_sketch_paser"
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="block p-4 rounded-lg border border-border/50 hover:border-primary/40 hover:bg-primary/5 transition-colors"
+                        >
+                          <div className="flex justify-between items-start">
+                            <h4 className="font-semibold text-primary">🔧 FreeCAD Sketch Parser Macro</h4>
+                            <ExternalLink className="w-4 h-4 text-muted-foreground" />
+                          </div>
+                          <p className="text-sm mt-1 text-muted-foreground">
+                            FreeCAD macro that auto-generates Python scripts for every sketch in a model — perfect for dataset creation.
+                          </p>
+                        </a>
+
+                      </div>
+                    </div>
+
+                  </div>
+                )}
               </CardContent>
             </Card>
           ))}
         </div>
-
-        {/* CADomatic Project - GLTF Models */}
-        <div className="space-y-4 mb-8">
-          <div className="bg-card border border-primary/20 rounded-lg p-6">
-            <h3 className="text-2xl font-semibold mb-2">CADomatic</h3>
-            <p className="text-muted-foreground mb-4">
-              AI-powered CAD workflow automation and intelligent design systems
-            </p>
-
-            <Collapsible open={cadomaticOpen} onOpenChange={setCadomaticOpen}>
-              <CollapsibleTrigger asChild>
-                <Button 
-                  variant="outline" 
-                  className="gap-2 border-primary/50 hover:border-primary"
-                >
-                  Show More Models
-                  <ChevronDown 
-                    className={`w-4 h-4 transition-transform ${
-                      cadomaticOpen ? 'rotate-180' : ''
-                    }`}
-                  />
-                </Button>
-              </CollapsibleTrigger>
-              
-              <CollapsibleContent className="mt-6 space-y-6">
-                {cadomaticModels.map((model, index) => (
-                  <div key={index} className="space-y-2">
-                    <h4 className="font-semibold text-sm">{model.name}</h4>
-                    <GLTFViewer modelUrl={model.url} />
-                  </div>
-                ))}
-              </CollapsibleContent>
-            </Collapsible>
-          </div>
-        </div>
-
-        {/* Other projects... */}
       </div>
     </section>
   );
