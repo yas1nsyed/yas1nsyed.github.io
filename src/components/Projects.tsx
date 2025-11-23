@@ -2,8 +2,9 @@ import { useState } from 'react';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { ExternalLink, Github } from "lucide-react";
-import { GLTFViewer } from './GLTFViewer'; // Your 3D viewer component
+import { ExternalLink, Github, ChevronDown } from "lucide-react";
+import { Collapsible, CollapsibleContent, CollapsibleTrigger } from './ui/collapsible';
+import { GLTFViewer } from './GLTFViewer';
 
 const projects = [
   {
@@ -11,6 +12,7 @@ const projects = [
     description: "Revolutionary LLM-powered CAD automation tool. Converts natural language prompts into fully editable, parametric FreeCAD models with modular Python script generation for customizable parts.",
     tech: ["Python", "LLM", "FreeCAD", "Parametric Design", "Automation"],
     github: "https://github.com/yas1nsyed/CADomatic",
+    hf: "https://huggingface.co/spaces/Yas1n/CADomatic",
     date: "Jul 2025",
     category: "AI/CAD",
     featured: true
@@ -29,6 +31,7 @@ const projects = [
     description: "AI-powered waste segregation system using Detectron2 for German Mülltrennung. Outputs masked images of trash classified by recycling bin type.",
     tech: ["PyTorch", "YOLOv11", "OpenCV", "Instance Segmentation"],
     github: "https://github.com/yas1nsyed/mulltrenner9000",
+    hf: "https://huggingface.co/spaces/Yas1n/mulltrenner9000",
     date: "Jun 2025",
     category: "Computer Vision"
   },
@@ -52,28 +55,30 @@ const cadomaticModels = [
   {
     name: "FLANGE",
     url: "/assets/Flange.gltf",
-    prompt: `Make a flange of OD 100mm, bore size 50mm, thickness 7.5mm. 
+    prompt: `Prompt : Make a flange of OD 100mm, bore size 50mm, thickness 7.5mm. 
              The height of the middle hollow neck must be 15mm. 
              Make 6 M12 holes at PCD 75mm.`,
   },
   {
     name: "TEAPOT",
     url: "/assets/Teapot.gltf",
-    prompt: `Make a Utah teapot.`,
+    prompt: `Prompt : Make a Utah teapot.`,
   },
   {
     name: "BEARING",
     url: "/assets/Bearing.gltf",
-    prompt: `Make a ball bearing of OD 32mm following standard convention.`,
+    prompt: `Prompt : Make a ball bearing of OD 32mm following standard convention.`,
   },
   {
     name: "HERRINGBONE GEAR",
     url: "/assets/HerringboneGear.gltf",
-    prompt: `Make a herringbone gear.`,
+    prompt: `Prompt : Make a herringbone gear.`,
   },
 ];
 
 const Projects = () => {
+  const [cadomaticOpen, setCadomaticOpen] = useState(false);
+
   return (
     <section id="projects" className="py-24 px-4">
       <div className="container mx-auto max-w-6xl">
@@ -138,58 +143,95 @@ const Projects = () => {
                       </a>
                     </Button>
                   )}
+
+                  {project.hf && project.title !== "CADomatic" && (
+                    <Button
+                      variant="outline"
+                      className="w-full mt-2 gap-2 hover:bg-primary/10 hover:text-primary"
+                      asChild
+                    >
+                      <a href={project.hf} target="_blank" rel="noopener noreferrer">
+                        Go to Hugging Face Space
+                        <ExternalLink className="w-4 h-4" />
+                      </a>
+                    </Button>
+                  )}
                 </div>
 
-                {/* CADomatic specific: 3D GLTF models */}
+                {/* CADomatic specific: collapsible GLTF models */}
                 {project.title === "CADomatic" && (
-                  <div className="mt-8 space-y-10">
-                    <div className="grid md:grid-cols-2 gap-6">
-                      {cadomaticModels.map((model, idx) => (
-                        <div key={idx} className="p-4 bg-secondary/50 rounded-xl space-y-2">
-                          <GLTFViewer modelUrl={model.url} />
-                          <div className="font-bold text-lg">{model.name}</div>
-                          <p className="text-sm text-muted-foreground">{model.prompt}</p>
+                  <div className="mt-8 space-y-6">
+                    <Collapsible open={cadomaticOpen} onOpenChange={setCadomaticOpen}>
+                      <CollapsibleTrigger asChild>
+                        <Button
+                          variant="outline"
+                          className="gap-2 border-primary/50 hover:border-primary w-full"
+                        >
+                          Show Generated CAD Models
+                          <ChevronDown
+                            className={`w-4 h-4 transition-transform ${cadomaticOpen ? 'rotate-180' : ''}`}
+                          />
+                        </Button>
+                      </CollapsibleTrigger>
+
+                      <CollapsibleContent className="mt-6">
+                        <div className="grid md:grid-cols-2 gap-6">
+                          {cadomaticModels.map((model, idx) => (
+                            <div key={idx} className="p-4 bg-secondary/50 rounded-xl space-y-2">
+                              <GLTFViewer modelUrl={model.url} />
+                              <div className="font-bold text-lg">{model.name}</div>
+                              <p className="text-sm text-muted-foreground">{model.prompt}</p>
+                            </div>
+                          ))}
                         </div>
-                      ))}
-                    </div>
+                      </CollapsibleContent>
+                    </Collapsible>
 
                     {/* Supporting Projects */}
-                    <div className="mt-12 space-y-6">
+                    <div className="mt-8 space-y-4">
                       <h3 className="text-2xl font-bold">Supporting Projects</h3>
 
                       <a
                         href="https://huggingface.co/datasets/Yas1n/FreeCAD_Sketches"
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="block p-4 rounded-xl bg-secondary/50 hover:bg-secondary transition-colors"
+                        className="block p-4 rounded-xl bg-secondary/50 hover:bg-secondary transition-colors flex justify-between items-start"
                       >
-                        <div className="font-semibold text-lg">🧩 FreeCAD Sketch Python Dataset</div>
-                        <p className="text-sm text-muted-foreground">
-                          A dataset of 3,000 Python files representing parametric FreeCAD sketches—ideal for training
-                          LLMs to understand CAD design.
-                        </p>
+                        <div>
+                          <div className="font-semibold text-lg">🧩 FreeCAD Sketch Python Dataset</div>
+                          <p className="text-sm text-muted-foreground mt-1">
+                            Dataset of 3,000 Python files representing parametric FreeCAD sketches.
+                          </p>
+                        </div>
+                        <ExternalLink className="w-4 h-4 text-muted-foreground mt-1" />
                       </a>
 
                       <a
                         href="https://github.com/yas1nsyed/freecad_sketch_paser"
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="block p-4 rounded-xl bg-secondary/50 hover:bg-secondary transition-colors"
+                        className="block p-4 rounded-xl bg-secondary/50 hover:bg-secondary transition-colors flex justify-between items-start"
                       >
-                        <div className="font-semibold text-lg">📐 FreeCAD Sketch Parser Macro</div>
-                        <p className="text-sm text-muted-foreground">
-                          A FreeCAD macro for automatically generating Python code for all sketches in a part.
-                        </p>
+                        <div>
+                          <div className="font-semibold text-lg">📐 FreeCAD Sketch Parser Macro</div>
+                          <p className="text-sm text-muted-foreground mt-1">
+                            Macro to auto-generate Python code for all sketches in a model.
+                          </p>
+                        </div>
+                        <ExternalLink className="w-4 h-4 text-muted-foreground mt-1" />
                       </a>
                     </div>
 
-                    {/* Generate Button */}
+                    {/* Create Your Own CAD Model Button */}
                     <div className="text-center mt-8">
                       <Button
                         size="lg"
                         className="bg-primary hover:bg-primary/90 text-primary-foreground shadow-lg hover:shadow-[var(--shadow-glow)] transition-all"
+                        asChild
                       >
-                        Generate Your Own CAD Model
+                        <a href="https://huggingface.co/spaces/Yas1n/CADomatic" target="_blank" rel="noopener noreferrer">
+                          Create Your Own CAD Model
+                        </a>
                       </Button>
                     </div>
                   </div>
